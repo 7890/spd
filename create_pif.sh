@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #part of https://github.com/7890/spd
 # create process instruction file "pif"
 # for given file with standard values
@@ -18,6 +18,21 @@ fi
 
 file="$1"
 daemon_input_dir="$2"
+
+#######################################################
+checkAvail()
+{
+	which "$1" >/dev/null 2>&1
+	ret=$?
+	if [ $ret -ne 0 ]
+	then
+		echo "error: tool \"$1\" not found. please install"
+		exit 1
+	fi
+}
+
+for tool in mv date uuidgen mktemp; \
+	do checkAvail "$tool"; done
 
 if [ ! -r "$file" ]
 then

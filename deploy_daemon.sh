@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # part of https://github.com/7890/spd
 # deploy a daemon instance
 #//tb/1612
@@ -18,6 +18,21 @@ daemon="$1"
 daemon_deploy_dir="$2"
 daemon_instance="$3"
 process="$4"
+
+#######################################################
+checkAvail()
+{
+	which "$1" >/dev/null 2>&1
+	ret=$?
+	if [ $ret -ne 0 ]
+	then
+		echo "error: tool \"$1\" not found. please install"
+		exit 1
+	fi
+}
+
+for tool in ln mkdir grep; \
+	do checkAvail "$tool"; done
 
 if [ ! -r "$daemon" ]
 then

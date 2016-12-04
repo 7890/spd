@@ -26,6 +26,21 @@ fi
 
 pif="$1"
 
+#######################################################
+checkAvail()
+{
+	which "$1" >/dev/null 2>&1
+	ret=$?
+	if [ $ret -ne 0 ]
+	then
+		echo "error: tool \"$1\" not found. please install"
+		exit 1
+	fi
+}
+
+for tool in date cat cut grep tail sleep; \
+	do checkAvail "$tool"; done
+
 if [ ! -r "$pif" ]
 then
 	echo "process.sh: error: missing read permission for file: $pif"
@@ -37,7 +52,7 @@ id=`cat "$pif" | grep "^id=" | tail -1 | cut -d"=" -f2`
 
 echo_()
 {
-        echo "process.sh $id: `date --iso-8601=ns`: $1"
+	echo "process.sh $id: `date --iso-8601=ns`: $1"
 }
 
 echo_ "starting"
