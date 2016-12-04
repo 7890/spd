@@ -65,7 +65,7 @@ else
 	ln -s "${PWD}/${daemon}" "$daemon_deploy_dir"/daemon.sh
 fi
 
-echo "$daemon"|grep "^/"
+echo "$process"|grep "^/"
 if [ $? -eq 0 ]
 then
 	#absolute path
