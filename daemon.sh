@@ -28,10 +28,10 @@
 #       -list the input directory with a .properties filter to match extepcted pifs.
 #        the file with the oldest timestamp/creation date will be processed next.
 #        the queue is first in first out "FIFO".
-#       -all (expected by daemon) variables are extracted from pif.
-#        this can include uri(s) to file(s), arguments or anything else
+#       -the only mandatory key in a pif is 'id' which can be used by daemon.sh and process.sh
+#       -process.sh will extract needed variables from pif.
+#        this can include uri(s) to file(s), output destinations or anything else
 #        that can be expressed as a string key=value pair.
-#        the only mandatory key in a pif is 'id'.
 #       -process input as requested
 #       -when finished, move the pif, process log and (eventually) output files to either:
 #        direcotry "done" or directory "failed".
@@ -74,10 +74,11 @@
 #       exit 0
 #    else
 ##      ...
-#       exit 1
 #    fi
 #    sleep 1
 # done
+## waited for too long
+# exit 1
 #
 #
 #
