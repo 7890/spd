@@ -3,6 +3,9 @@
 # create process instruction file "pif"
 # for given file with standard values
 # and move to daemon input dir
+#
+# this file is process-specific (example)
+#
 #//tb/1612
 
 #FULLPATH="`pwd`/$0"
@@ -12,7 +15,7 @@
 if [ $# -ne 2 ]
 then
 	echo "error: need arguments"
-	echo "file,daemon input dir"
+	echo "file, daemon input dir"
 	exit 1
 fi
 

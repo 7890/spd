@@ -81,6 +81,14 @@
 # exit 1
 #
 #
+# generic files:
+# -daemon.sh
+# -deploy_daemon.sh
+#
+# files specific to process:
+# -create_pif.sh
+# -process.sh
+#
 #
 # daemons can help to process things in parallel and make use of multiple available cpus
 # instead of processing everything sequentially.
@@ -177,6 +185,12 @@ do
 
 		#use tail to get last added
 		id=`cat "$pif" | grep "^id=" | tail -1 | cut -d"=" -f2`
+		ret=$?
+		if [ $ret -ne 0 ]
+		then
+			echo_ "/!\\ id not found in pif, skippping"
+			continue
+		fi
 		echo_ "id is $id"
 
 		"$process_script" "${indir}/${pif}" 2>&1 | tee "$pif".process.log

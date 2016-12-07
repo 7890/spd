@@ -55,6 +55,12 @@ then
 	exit 1
 fi
 
+#create symbolic links
+
+#the daemon.sh script is generic
+#variations thereof can have any name or location
+#it's linked as daemon.sh in the daemon directory
+
 echo "$daemon"|grep "^/"
 if [ $? -eq 0 ]
 then
@@ -65,6 +71,9 @@ else
 	ln -s "${PWD}/${daemon}" "$daemon_deploy_dir"/daemon.sh
 fi
 
+#the process specific process.sh can have any name or location
+#it's linked as process.sh in the daemon directory
+
 echo "$process"|grep "^/"
 if [ $? -eq 0 ]
 then
@@ -74,6 +83,8 @@ else
 	#relative path
 	ln -s "${PWD}/${process}" "$daemon_deploy_dir"/process.sh
 fi
+
+#goto daemon directory and start main cycle
 
 cd "$daemon_deploy_dir" && ./daemon.sh "$daemon_instance"
 
